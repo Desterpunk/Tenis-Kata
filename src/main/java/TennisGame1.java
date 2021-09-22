@@ -12,24 +12,30 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
+        if (playerName.equals("player1"))
             playerScore1 += 1;
         else
             playerScore2 += 1;
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore=0;
-        if (playerScore1 == playerScore2)
+        if (isEqual())
         {
             return getScoreAll(playerScore1);
         }
-        if (playerScore1 >=4 || playerScore2 >=4)
+        if (isAdvantage())
         {
            return getAdvantageOrWin(playerScore1,playerScore2);
         }
         return Score.nameFromPoints(playerScore1) + "-" + Score.nameFromPoints(playerScore2);
+    }
+
+    private boolean isAdvantage() {
+        return playerScore1 >=4 || playerScore2 >=4;
+    }
+
+    private boolean isEqual() {
+        return playerScore1 == playerScore2;
     }
 
     private String getScoreAll(int playerScore) {
